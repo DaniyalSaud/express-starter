@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 import { ZodError, ZodType } from "zod";
 
-/* 
-    Middleware to validate request body against a Zod schema 
+/*
+    Middleware to validate request body against a Zod schema
 */
 
 export function validateBody(schema: ZodType) {

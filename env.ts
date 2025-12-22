@@ -1,12 +1,17 @@
 import "dotenv/config";
 import { z } from "zod";
 
-
 process.env.APP_STAGE = process.env.APP_STAGE || "dev";
 
 const isProduction = process.env.APP_STAGE === "production";
 const isDevelopment = process.env.APP_STAGE === "dev";
 const isTesting = process.env.APP_STAGE === "test";
+
+if (isTesting) {
+  // Set your test database string here
+  process.env.DATABASE_URL =
+    "postgresql://neondb_owner:npg_fseIkb38DzyC@ep-holy-sun-agg8avms.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require";
+}
 
 const envSchema = z.object({
   NODE_ENV: z

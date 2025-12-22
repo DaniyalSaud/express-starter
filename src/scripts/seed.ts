@@ -10,7 +10,8 @@ async function seedUser() {
     .values({
       username: "danial",
       email: "danial@test.com",
-      password_hash: "12345678",
+      password: "12345678",
+      firstName: "danial",
     })
     .returning();
 
@@ -55,17 +56,18 @@ async function seed() {
     console.log("📝 Seeding Notes...");
     await seedNotes(user.id);
 
-    console.log("🎉 Seeding completed successfully!");
+    console.log("🎉 Seeding completed successfully! \n \n");
+    console.log("Demo User: ");
+    console.log("email : ", user.email);
+    console.log("password : ", user.password);
   } catch (err) {
     console.error("❌ Seeding failed:", err);
     process.exit(1);
   }
 }
 
-if (import.meta.url === `file://${process.argv[2]}`) {
+if (import.meta.main) {
   seed()
-    .then(() => {
-      process.exit(1);
-    })
-    .catch(process.exit(0));
+    .then(() => process.exit(0))
+    .catch(() => process.exit(1));
 }
