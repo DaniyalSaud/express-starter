@@ -1,9 +1,7 @@
-import { drizzle } from "drizzle-orm/libsql/node";
-import env from "../../env";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+import env from "~/env";
 
-export const db = drizzle({
-  connection: {
-    url: env.DATABASE_URL,
-    authToken: env.DB_TOKEN,
-  },
-});
+const sql = neon(env.DATABASE_URL);
+
+export const db = drizzle({ client: sql });

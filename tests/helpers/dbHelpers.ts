@@ -1,5 +1,5 @@
 import { db } from "@/db/connection";
-import { notes } from "@/db/schema/schema";
+import { notes } from "@/db/schema/notes";
 import { users, type NewUser } from "@/db/schema/users";
 import { generateToken } from "@/utils/jwt";
 import { hashPassword } from "@/utils/password";

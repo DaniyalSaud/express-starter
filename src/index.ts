@@ -1,7 +1,6 @@
 import env from "~/env";
 import { app } from "@/server";
 import ip from "ip";
-import type { Request, Response } from "express";
 
 app.listen(env.PORT, () => {
   console.log(`Server running in ${env.APP_STAGE} mode on port ${env.PORT}`);

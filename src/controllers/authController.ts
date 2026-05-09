@@ -8,7 +8,6 @@ import type { Request, Response } from "express";
 export async function register(req: Request<any, any, NewUser>, res: Response) {
   try {
     const { email, username, password, firstName, lastName } = req.body;
-
     const hashedPassword = await hashPassword(password);
 
     const [user] = await db
@@ -17,6 +16,7 @@ export async function register(req: Request<any, any, NewUser>, res: Response) {
         username,
         email,
         password: hashedPassword,
+        role: "user",
         firstName,
         lastName,
       })
@@ -33,6 +33,7 @@ export async function register(req: Request<any, any, NewUser>, res: Response) {
       id: user?.id as number,
       username: user?.username as string,
       email: user?.email as string,
+      role: "user",
     });
 
     return res.status(201).json({
@@ -54,7 +55,7 @@ export async function login(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
 
-    const [user] = await db.select().from(users).where(eq(email, users.email));
+    const [user] = await db.select().from(users).where(eq(users.email, email));
 
     if (!user) {
       return res.status(401).json({
@@ -74,6 +75,7 @@ export async function login(req: Request, res: Response) {
       id: user.id,
       email: user.email,
       username: user.username,
+      role: "user",
     });
 
     return res.status(201).json({

@@ -1,7 +1,7 @@
 // For seeding some data in the Database
 
 import { db } from "@/db/connection";
-import { notes } from "@/db/schema/schema";
+import { notes } from "@/db/schema/notes";
 import { users } from "@/db/schema/users";
 
 async function seedUser() {

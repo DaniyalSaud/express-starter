@@ -19,13 +19,22 @@ const envSchema = z.object({
     .default("development"),
   APP_STAGE: z.enum(["dev", "production", "test"]).default("dev"),
   PORT: z.coerce.number().default(3000),
-  DATABASE_URL: z.string().startsWith("libsql://"), // Example for Turso
+  DATABASE_URL: z.string().startsWith("postgresql://"), // Example for postgres
   DB_TOKEN: z.string().optional(),
   JWT_SECRET: z
     .string()
     .min(32, "JWT_SECRET must be at least 32 characters long"),
   JWT_EXPIRES_IN: z.string().default("7d"),
   BCRYPT_ROUNDS: z.coerce.number().min(10).max(20).default(12),
+  CLOUDINARY_CLOUD_NAME: z
+    .string()
+    .min(5, "CLOUDINARY_CLOUD_NAME must be at least 5 characters long"),
+  CLOUDINARY_API_KEY: z
+    .string()
+    .min(10, "CLOUDINARY_API_KEY must be at least 10 characters long"),
+  CLOUDINARY_API_SECRET: z
+    .string()
+    .min(10, "CLOUDINARY_API_SECRET must be at least 10 characters long"),
 });
 
 export type Env = z.infer<typeof envSchema>;
